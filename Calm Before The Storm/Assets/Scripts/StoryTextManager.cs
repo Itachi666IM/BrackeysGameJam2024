@@ -5,6 +5,7 @@ using TMPro;
 public class StoryTextManager : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI gameText;
+    [SerializeField] GameObject mainMenuCanvas;
     [SerializeField] string[] sentences;
     private int index = 0;
     [SerializeField] float typingSpeed = 0.02f;
@@ -47,6 +48,7 @@ public class StoryTextManager : MonoBehaviour
             gameText.text = "";
             continueButton.SetActive(false);
             storyCanvas.SetActive(false);
+            mainMenuCanvas.SetActive(true);
         }
     }
 }
