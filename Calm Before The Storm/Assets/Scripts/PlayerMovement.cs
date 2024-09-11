@@ -9,7 +9,10 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D myRigidbody;
     private Animator myAnimator;
 
-    [SerializeField] float moveSpeed = 1000f;
+    public bool canMove = true;
+    public bool hasPressed = false;
+
+    [SerializeField] float moveSpeed = 5f;
 
     private void Start()
     {
@@ -19,16 +22,32 @@ public class PlayerMovement : MonoBehaviour
 
     void OnMove(InputValue value)
     {
+        if(!canMove)
+        { return; }
         myMovement = value.Get<Vector2>();
+    }
+
+    void OnPick(InputValue value)
+    {
+        if (!canMove)
+        { return; }
+        if (value.isPressed)
+        {
+            hasPressed = true;
+        }
     }
 
     void Walk()
     {
-        myRigidbody.velocity = myMovement * moveSpeed * Time.deltaTime;
+        if (!canMove)
+        { return; }
+        myRigidbody.velocity = myMovement * moveSpeed;
     }
 
     private void Update()
     {
+        if (!canMove)
+        { return; }
         Walk();
         AnimationState();
         FlipSprite();
@@ -36,7 +55,9 @@ public class PlayerMovement : MonoBehaviour
 
     void AnimationState()
     {
-        if((Mathf.Abs(myRigidbody.velocity.x) > Mathf.Epsilon) || (Mathf.Abs(myRigidbody.velocity.y) > Mathf.Epsilon))
+        if (!canMove)
+        { return; }
+        if ((Mathf.Abs(myRigidbody.velocity.x) > Mathf.Epsilon) || (Mathf.Abs(myRigidbody.velocity.y) > Mathf.Epsilon))
         {
             myAnimator.SetBool("isRunning", true);
         }
@@ -48,6 +69,8 @@ public class PlayerMovement : MonoBehaviour
 
     void FlipSprite()
     {
+        if (!canMove)
+        { return; }
         bool playerHasHorizontalSpeed = Mathf.Abs(myRigidbody.velocity.x) > Mathf.Epsilon;
 
         if (playerHasHorizontalSpeed)
