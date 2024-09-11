@@ -41,7 +41,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!canMove)
         { return; }
-        myRigidbody.velocity = myMovement * moveSpeed;
+        myRigidbody.velocity = myMovement * moveSpeed * Time.deltaTime * 500f;
     }
 
     private void Update()
