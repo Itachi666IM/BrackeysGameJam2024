@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class ButtonPush : MonoBehaviour
 {
     [Header("Button Variables")]
     [SerializeField] SpriteRenderer buttonSprite;
     [SerializeField] Material buttonPushed;
+    [SerializeField] AudioClip buttonPushSound;
+    [SerializeField] AudioSource audioSource;
 
     [Header("Door Variables")]
     [SerializeField] GameObject door;
@@ -36,19 +39,19 @@ public class ButtonPush : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag == "Player")
+        if(collision.IsTouchingLayers(LayerMask.GetMask("Interactables")))
         {
             ChangeButtonMaterial();
             OpenDoor();
+            audioSource.PlayOneShot(buttonPushSound);
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if(collision.tag == "Player")
-        {
-            buttonSprite.material = buttonDefaultMaterial;
-            CloseDoor();
-        }
+        
+        buttonSprite.material = buttonDefaultMaterial;
+        CloseDoor();
+       
     }
 }
