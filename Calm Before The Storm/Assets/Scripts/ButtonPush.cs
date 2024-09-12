@@ -39,12 +39,10 @@ public class ButtonPush : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.IsTouchingLayers(LayerMask.GetMask("Interactables")))
-        {
-            ChangeButtonMaterial();
-            OpenDoor();
-            audioSource.PlayOneShot(buttonPushSound);
-        }
+        ChangeButtonMaterial();
+        OpenDoor();
+        audioSource.PlayOneShot(buttonPushSound);
+        
     }
 
     private void OnTriggerExit2D(Collider2D collision)
