@@ -27,7 +27,6 @@ public class MenuManager : MonoBehaviour
 
     public void QuitGame()
     {
-        Debug.Log("Quitting...");
         Application.Quit();
     }
 }

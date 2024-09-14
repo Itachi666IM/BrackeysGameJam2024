@@ -8,6 +8,6 @@ public class ClickSound : MonoBehaviour
     [SerializeField] AudioClip buttonClick;
     public void PlayButtonClickSound()
     {
-        audioSource.PlayOneShot(buttonClick);
+        audioSource.PlayOneShot(buttonClick, 0.5f);
     }
 }
