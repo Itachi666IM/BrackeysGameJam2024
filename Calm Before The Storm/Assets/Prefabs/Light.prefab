@@ -152,8 +152,9 @@ MonoBehaviour:
   reflections: 2
   layerDetection:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 576
   maxRayDistance: 1000
+  lightDoor: {fileID: 0}
 --- !u!1 &6739489522585956904
 GameObject:
   m_ObjectHideFlags: 0
